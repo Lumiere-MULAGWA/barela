@@ -44,7 +44,8 @@
         else { 
             approved = false; 
                 if (approved != oldApproved) { 
-                    Serial.println(F("Card incorrect!")); digitalWrite(ledPin, LOW); 
+                    Serial.println(F("Card incorrect!")); 
+                    digitalWrite(ledPin, LOW); 
                     servo.write(servoClose);
                } 
         } 
@@ -54,9 +55,11 @@
             if ( ! rfid.PICC_IsNewCardPresent()) return; 
         
             if ( !rfid.PICC_ReadCardSerial()) return; 
-            if (rfid.uid.uidByte[0] != nuidPICC[0] || rfid.uid.uidByte[1] != nuidPICC[1] || rfid.uid.uidByte[2] != nuidPICC[2] || rfid.uid.uidByte[3] != nuidPICC[3] ){
+            if (rfid.uid.uidByte[0] != nuidPICC[0] || rfid.uid.uidByte[1] != nuidPICC[1] || rfid.uid.uidByte[2] != nuidPICC[2] || rfid.uid.uidByte[3] != nuidPICC[3] )
+            {
                 Serial.println(F("A new card has been detected.")); 
-                for (byte i = 0; i < 4; i++) { 
+                for (byte i = 0; i < 4; i++) 
+                { 
                     nuidPICC[i] = rfid.uid.uidByte[i]; 
                 } 
                 Serial.print(F("RFID tag in dec: ")); 
@@ -64,7 +67,8 @@
                 Serial.println(); 
             } 
                 rfid.PICC_HaltA(); 
-                rfid.PCD_StopCrypto1(); } 
+                rfid.PCD_StopCrypto1(); 
+    } 
                 
     void printDec(byte *buffer, byte bufferSize) {
             for (byte i = 0; i < bufferSize; i++) { 
